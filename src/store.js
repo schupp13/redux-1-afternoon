@@ -3,10 +3,10 @@ import {createStore} from 'redux';
 
 
 const initialState = {
-  recipeName: '',
-  recipeCategory: '',
-  authorsFirstName: '',
-  authorsLastName: '',
+  name: '',
+  category: '',
+  authorFirst: '',
+  authorLast: '',
   ingredients: [],
   instructions: [],
   recipes:[]
@@ -23,49 +23,54 @@ export const ADD_INSTRUCTION = "ADD_INSTRUCTION";
 
 export const ADD_RECIPE = "ADD_RECIPE";
 
+export const DELETE_CARD = "DELETE_CARD";
+
 
 
 
 
 function reducer(state = initialState, action){
   const {payload, type} = action;
+  console.log(action);
   switch (type) {
-case UPDATE_NAME:
-  return {...state, recipeName: payload}
-    case UPDATE_CATEGORY:
-      return {...state, recipeCategory: payload}
-    case UPDATE_AUTHOR_LASTNAME:
-      return {...state, authorsLastName: payload}
-      case UPDATE_AUTHOR_FIRSTNAME:
-        return {...state, authorsFirstName: payload}
-        case ADD_INGREDIENT:
-          const newIngredients = [...state.ingredients, payload]
-          return {...state,ingredients: newIngredients}
-          case ADD_INSTRUCTION:
-            const newInstructions = [...state.instructions, payload]
-            return{...state,instructions: newInstructions}
-            case ADD_RECIPE:
-                const {
-                  recipeName,
-                  recipeCategory,
-                  authorsFirstName,
-                  authorsLastName,
-                  ingredients,
-                  instructions
-                } = state;
-                const recipe = {
-                  recipeName,
-                  recipeCategory,
-                  authorsFirstName,
-                  authorsLastName,
-                  ingredients,
-                  instructions
-                };
-                const newRecipes = [...state.recipes, recipe];
-                return {...initialState, recipes: newRecipes }
+  case UPDATE_NAME:
+    return {...state, name: payload}
+  case UPDATE_CATEGORY:
+    return {...state, category: payload}
+  case UPDATE_AUTHOR_LASTNAME:
+   return {...state, authorLast: payload}
+  case UPDATE_AUTHOR_FIRSTNAME:
+   return {...state, authorFirst: payload}
+  case ADD_INGREDIENT:
+   const newIngredients = [...state.ingredients, payload]
+   return {...state,ingredients: newIngredients}
+  case ADD_INSTRUCTION:
+   const newInstructions = [...state.instructions, payload]
+   return{...state,instructions: newInstructions}
+  case ADD_RECIPE:
+    const {
+      name,
+      category,
+      authorFirst,
+      authorLast,
+      ingredients,
+      instructions
+    } = state;
+    const recipe = {
+      name,
+      category,
+      authorFirst,
+      authorLast,
+      ingredients,
+      instructions
+    };
+    const newRecipes = [...state.recipes, recipe];
+      return {...initialState, recipes: newRecipes }
+    case DELETE_CARD:
+       
 
-    default: 
-    return state;
+  default: 
+  return state;
   }
 }
 
